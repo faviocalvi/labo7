@@ -1,0 +1,58 @@
+﻿<Page x:Class="labo7.Presentation.SecondPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:labo7.Presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:uen="using:Uno.Extensions.Navigation.UI"
+      xmlns:utu="using:Uno.Toolkit.UI"
+      xmlns:um="using:Uno.Material"
+      Background="{ThemeResource BackgroundBrush}"
+      mc:Ignorable ="d">
+
+
+  <Grid utu:SafeArea.Insets="VisibleBounds">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <utu:NavigationBar Content="Second Page">
+      <utu:NavigationBar.MainCommand>
+        <AppBarButton>
+          <AppBarButton.Icon>
+            <BitmapIcon UriSource="ms-appx:///Assets/Images/back.png" />
+          </AppBarButton.Icon>
+        </AppBarButton>
+      </utu:NavigationBar.MainCommand>
+    </utu:NavigationBar>
+    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+      <ComboBox x:Name="SearchOptions" Width="150" SelectedItem="{Binding SearchOption, Mode=TwoWay}">
+        <ComboBoxItem Content="Name" />
+        <ComboBoxItem Content="Lastname" />
+        <ComboBoxItem Content="Email" />
+      </ComboBox>
+      <TextBox x:Name="SearchTextBox" Width="200" PlaceholderText="Enter search term" Text="{Binding SearchTerm, Mode=TwoWay}" />
+      <Button Content="Search" Command="{Binding SearchCommand}" />
+    </StackPanel>
+    <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="8">
+      <Button Content="Sort Ascending" Command="{Binding SortAscendingCommand}" />
+      <Button Content="Sort Descending" Command="{Binding SortDescendingCommand}" />
+    </StackPanel>
+    <ListView Grid.Row="3" ItemsSource="{Binding Students}" Margin="10">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Vertical" Padding="10">
+            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+            <TextBlock Text="{Binding LastName}" />
+            <TextBlock Text="{Binding Email}" />
+          </StackPanel>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <TextBlock Grid.Row="4" Text="{Binding TotalStudents}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    <TextBlock x:Name="NotificationArea" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green" />
+  </Grid>
+</Page>
